@@ -1,0 +1,20 @@
+r << XXX 1
+0 PIN_FLD_POID POID [0] 0.0.0.1 /account 584314 0
+0 PIN_FLD_PAYINFO		ARRAY [1] allocated 20,
+1	PIN_FLD_POID POID [0] 0.0.0.1 /payinfo -1 0
+1	PIN_FLD_PAY_TYPE	ENUM [0] 10001
+1 		PIN_FLD_INHERITED_INFO SUBSTRUCT [0] allocated 20, used 2
+2			PIN_FLD_INV_INFO      ARRAY [0] allocated 20, 2
+3     			PIN_FLD_ADDRESS         STR [0] "200 Park Avenue"
+3     			PIN_FLD_CITY            STR [0] "New York"
+3     			PIN_FLD_COUNTRY         STR [0] "USA"
+3     			PIN_FLD_DELIVERY_DESCR    STR [0] "statistical@here.com"
+3     			PIN_FLD_DELIVERY_PREFER   ENUM [0] 0
+3     			PIN_FLD_EMAIL_ADDR      STR [0] "statistical@here.com"
+3     			PIN_FLD_INV_INSTR       STR [0] ""
+3     			PIN_FLD_INV_TERMS      ENUM [0] 0
+3     			PIN_FLD_NAME            STR [0] "George Baker"
+3     			PIN_FLD_STATE           STR [0] "NY"
+3     			PIN_FLD_ZIP             STR [0] "10166"
+XXX
+xop ST_OP_SET_STATUS_PAYINFO 0 1

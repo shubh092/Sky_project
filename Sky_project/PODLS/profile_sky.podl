@@ -1,0 +1,105 @@
+#=======================================
+#  Field PIN_FLD_ORDER_TYPE
+#=======================================
+#  Field SKY_FLD_CUSTOMER_ID
+#=======================================
+STRING SKY_FLD_CUSTOMER_ID {
+
+	ID = 10007;
+	DESCR = "Customer ID";
+}
+SUBSTRUCT SKY_FLD_PROFILE_INFO {
+
+	ID = 10008;
+	DESCR = "To store sky personal data";
+}
+
+
+#=======================================
+#  Storable Class /profile/sky
+#=======================================
+
+STORABLE CLASS /profile/sky {
+
+	READ_ACCESS = "Self";
+	WRITE_ACCESS = "Self";
+	DESCR = "Table to Store Saralam Custom Profile";
+	IS_PARTITIONED = "0";
+
+
+	SUBSTRUCT SKY_FLD_PROFILE_INFO {
+
+		DESCR = "Table to store custom Saralam profile data";
+		ORDER = 0;
+		AUDITABLE = 0;
+		ENCRYPTABLE = 0;
+		SERIALIZABLE = 0;
+
+		#===================
+		#  Fields 
+		#===================
+
+
+        STRING PIN_FLD_ORDER_TYPE {
+
+                DESCR = "Order Type";
+                ORDER = 0;
+                LENGTH = 120;
+                CREATE = Optional;
+                MODIFY = Writeable;
+                AUDITABLE = 1;
+                ENCRYPTABLE = 0;
+                SERIALIZABLE = 0;
+        }
+
+        STRING SKY_FLD_CUSTOMER_ID {
+
+                DESCR = "Customer ID";
+                ORDER = 0;
+                LENGTH = 120;
+                CREATE = Optional;
+                MODIFY = Writeable;
+                AUDITABLE = 1;
+                ENCRYPTABLE = 0;
+                SERIALIZABLE = 0;
+        }
+		
+	}
+
+}
+
+
+#=======================================
+#  Storable Class /profile/sky
+#=======================================
+
+STORABLE CLASS /profile/sky IMPLEMENTATION ORACLE7 {
+
+	#===================
+	#  Fields 
+	#===================
+
+
+	SUBSTRUCT SKY_FLD_PROFILE_INFO {
+
+		SQL_TABLE = "profile_sky_t";
+
+		#===================
+		#  Fields 
+		#===================
+
+
+		STRING PIN_FLD_ORDER_TYPE {
+
+			SQL_COLUMN = "Order_type";
+		}
+		
+		STRING SKY_FLD_CUSTOMER_ID {
+
+			SQL_COLUMN = "Customer_ID";
+		}
+
+	}
+
+}
+

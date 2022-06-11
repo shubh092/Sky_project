@@ -1,0 +1,28 @@
+r << XXX 1
+0 PIN_FLD_POID           POID [0] 0.0.0.1 /account 584314 14
+0 PIN_FLD_SERVICE_OBJ    POID [0] 0.0.0.1 /service/content 584954 33
+0 PIN_FLD_PROGRAM_NAME    STR [0] "Customer Center"
+0 PIN_FLD_DEAL_INFO    SUBSTRUCT [0] allocated 20, used 7
+1     PIN_FLD_NAME            STR [0] "sky_wireless_bundle"
+1     PIN_FLD_POID           POID [0] 0.0.0.1 /deal 533844 0
+1     PIN_FLD_END_T        TSTAMP [0] (0) <null>
+1     PIN_FLD_FLAGS           INT [0] 0
+1     PIN_FLD_START_T      TSTAMP [0] (0) <null>
+1     PIN_FLD_DESCR           STR [0] "sky_wireless_bundle"
+1     PIN_FLD_PRODUCTS      ARRAY [0] allocated 32, used 32
+2         PIN_FLD_PURCHASE_END_T TSTAMP [0] (0) <null>
+2         PIN_FLD_PURCHASE_START_T TSTAMP [0] (1650067073) Monday, april 15, 2022 7:38:08
+2         PIN_FLD_USAGE_END_DETAILS    INT [0] 2
+2         PIN_FLD_USAGE_START_UNIT    INT [0] -1
+2         PIN_FLD_CYCLE_END_DETAILS    INT [0] 2
+2         PIN_FLD_QUANTITY     DECIMAL [0] 1
+2         PIN_FLD_PURCHASE_END_DETAILS    INT [0] 2
+2         PIN_FLD_PRODUCT_OBJ    POID [0] 0.0.0.1 /product 535526 1
+2         PIN_FLD_USAGE_DISCOUNT DECIMAL [0] 0
+2         PIN_FLD_DESCR           STR [0] "sky_wireless_voice"
+2         PIN_FLD_STATUS         ENUM [0] 1
+2         PIN_FLD_STATUS_FLAGS    INT [0] 0
+2         PIN_FLD_CYCLE_END_T  TSTAMP [0] (0) <null>
+2         PIN_FLD_CYCLE_START_T TSTAMP [0] (1650067073) Monday, april 15, 2022 7:38:08
+XXX
+xop ST_SKY_PURCHASE_BUNDLE_CHANGE_BDOM 0 1
