@@ -10,7 +10,7 @@
  *******************************************************************/
 
 #ifndef lint
-static  char Sccs_Id[] = "@(#)$Id: sky_create_account_config.c /cgbubrm_main.rwsmod/1 2011/07/26 04:22:50 dbangalo Exp $";
+static  char Sccs_Id[] = "@(#)$Id: fm_sky_create_account_config.c /cgbubrm_main.rwsmod/1 2011/07/26 04:22:50 dbangalo Exp $";
 #endif
 
 #include <stdio.h>			/* for FILE * in pcm.h */
@@ -20,12 +20,12 @@ static  char Sccs_Id[] = "@(#)$Id: sky_create_account_config.c /cgbubrm_main.rws
 #include "cm_fm.h"
 #include "cust_flds_ops.h"
 
-PIN_EXPORT void * sky_create_account_config_func();
+PIN_EXPORT void * fm_sky_create_account_config_func();
 
 /*******************************************************************
  *******************************************************************/
 
-struct cm_fm_config sky_create_account_config[] = {
+struct cm_fm_config fm_sky_create_account_config[] = {
 	/* opcode as a u_int, function name (as a string) */
 
         /*****************************************************************************
@@ -40,7 +40,7 @@ struct cm_fm_config sky_create_account_config[] = {
 };
 
 void *
-sky_create_account_config_func()
+fm_sky_create_account_config_func()
 {
-  return ((void *) (sky_create_account_config));
+  return ((void *) (fm_sky_create_account_config));
 }

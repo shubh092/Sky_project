@@ -60,17 +60,17 @@ INCFILES= $(INCDIR)/pin_cust.h $(INCDIR)/pcm.h \
 	$(INCDIR)/cust_flds_ops.h
 
 #
-FILES= sky_create_account.c \
+FILES= fm_sky_create_account.c \
 	fm_sky_act_set_status_and_payinfo.c \
-	sky_create_account_config.c \
-	sky_subs_purchase_deal.c
+	fm_sky_create_account_config.c \
+	fm_sky_subs_purchase_deal.c
 	 
-OBJECTS= sky_create_account.o \
+OBJECTS= fm_sky_create_account.o \
 	fm_sky_act_set_status_and_payinfo.o \
- 	sky_create_account_config.o \
-	sky_subs_purchase_deal.o
+ 	fm_sky_create_account_config.o \
+	fm_sky_subs_purchase_deal.o
 	
-LIBCUST=sky_create_account.$(SL_EXT)
+LIBCUST=fm_sky_act.$(SL_EXT)
 
 ###########
 

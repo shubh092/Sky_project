@@ -10,7 +10,7 @@
  *******************************************************************/
 
 #ifndef lint
-static  char    Sccs_id[] = "@(#)%Portal Version: sky_subs_purchase_deal.c:ServerIDCVelocityInt:3:2006-Sep-06 16:40:39 %";
+static  char    Sccs_id[] = "@(#)%Portal Version: fm_sky_subs_purchase_deal.c:ServerIDCVelocityInt:3:2006-Sep-06 16:40:39 %";
 #endif
 
 /*******************************************************************
@@ -33,7 +33,7 @@ static  char    Sccs_id[] = "@(#)%Portal Version: sky_subs_purchase_deal.c:Serve
 #include "ops/cust.h"
 #include "ops/subscription.h"
 
-#define FILE_SOURCE_ID  "sky_subs_purchase_deal.c"
+#define FILE_SOURCE_ID  "fm_sky_subs_purchase_deal.c"
 
 
 /*******************************************************************
@@ -147,15 +147,26 @@ fm_sky_subs_purchase_deal(
 	time_t			now_t = pin_virtual_time(NULL);
 	poid_t          	*payinfo_pdp = NULL;
         poid_t          	*bi_pdp = NULL;
-	time_t			abs_t = 0;
-	time_t 			relative_t = 0;	
+	time_t			abs_purchase_t = 0;
+	time_t			abs_cycle_t = 0;
+	time_t 			relative_purchase_t = 0;	
+	time_t 			relative_cycle_t = 0;	
+	time_t 			next_t = 0;	
+	time_t 			future_t = 0;	
+	void			*vp_purchase = NULL;	
+	void			*vp_cycle = NULL;	
 	void			*vp = NULL;	
 	char			msg[100];
 	char			msg1[100];
-	struct tm		*tminfo = NULL; 
-	char			*date_strp = NULL;
-	char			time_str[32] = {'\0'}; 
-
+	char			msg2[100];
+	int32 			val1 = 0;	
+	/****************************************************
+	*convertion time_t to string
+	*****************************************************/
+	struct tm		tminfo;  
+	char		*date_strp = NULL;
+	char		time_str[32] = {'\0'};
+		
 	 if (PIN_ERR_IS_ERR(ebufp))
         {
                 return;
@@ -177,38 +188,35 @@ fm_sky_subs_purchase_deal(
 
 	prod_array_flistp =  PIN_FLIST_ELEM_GET(deal_substr_flistp, PIN_FLD_PRODUCTS, 0, 1, ebufp );
 
-	vp = PIN_FLIST_FLD_GET(prod_array_flistp, PIN_FLD_PURCHASE_START_T, 1, ebufp );	
+	vp_purchase = PIN_FLIST_FLD_GET(prod_array_flistp, PIN_FLD_PURCHASE_START_T, 1, ebufp );	
+	vp_cycle = PIN_FLIST_FLD_GET(prod_array_flistp, PIN_FLD_CYCLE_START_T, 1, ebufp );	
 	
-	if(!vp){
+	if(!vp_purchase){
 		PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_DEBUG,
 					"fm_sky_subs_purchase_deal : ERROR in PIN_FLD_PURCHASE_START_T");
 	}
 	
-	abs_t = *(time_t *)vp;
+	abs_purchase_t = *(time_t *)vp_purchase;
 	
-	/***if(now_t > abs_t)
-	{
-		pin_set_err(ebufp, PIN_ERRLOC_FM,
-			PIN_ERRCLASS_SYSTEM_DETERMINATE,
-				PIN_FLD_PURCHASE_START_T, 0, 0, 0);
-		PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
-			"Purchased_t value is less than pin_virtual_time", ebufp);
-	goto cleanup;
-	}**/
+	relative_purchase_t =  abs_purchase_t - now_t;
 
-	relative_t =  abs_t - now_t;
+	sprintf(msg,"relative_purchase_t : %d", relative_purchase_t);
+	PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_DEBUG, msg);
 
-	if(relative_t < 0)
+	if(vp_cycle)
 	{
-		relative_t = relative_t*-1;
+        	abs_cycle_t = *(time_t *)vp_cycle;
+
+       	 	relative_cycle_t =  abs_cycle_t - now_t;
 	}
-	sprintf(msg,"relative_t : %d", relative_t);
+		
+	sprintf(msg,"relative_cycle_t : %d", relative_cycle_t);
 	PIN_ERR_LOG_MSG(PIN_ERR_LEVEL_DEBUG, msg);
 	
 	PIN_FLIST_FLD_SET(prod_array_flistp, PIN_FLD_PURCHASE_START_T,
-			(void *)&relative_t, ebufp );
+			(void *)&relative_purchase_t, ebufp );
 	PIN_FLIST_FLD_SET(prod_array_flistp, PIN_FLD_CYCLE_START_T,
-			(void *)&relative_t, ebufp );
+			(void *)&relative_cycle_t, ebufp );
 
 	struct tm tm = *localtime(&now_t);
 	sprintf(msg1,"DBOM: %02d\n", tm.tm_mday);
@@ -230,6 +238,8 @@ fm_sky_subs_purchase_deal(
 	goto cleanup;
         }
 
+	*o_flistpp = purchase_deal_rflistp; 
+	
 	PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG,
 		"fm_sky_get_bill_unitfm_sky_subs_purchase_deal output flist", purchase_deal_rflistp);
 
@@ -262,8 +272,6 @@ fm_sky_subs_purchase_deal(
 	PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG,
 		"fm_sky_subs_purchase_deal set billinfo output flist", set_billinfo_rflistp);
 
-	*o_flistpp = set_billinfo_rflistp; 
-	
 	PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG,
 		"fm_sky_subs_purchase_deal set billinfo output flist after assigning to o_flistpp", *o_flistpp);
 	cleanup:

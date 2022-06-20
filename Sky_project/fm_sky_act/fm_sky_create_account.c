@@ -10,7 +10,7 @@
  *******************************************************************/
 
 #ifndef lint
-static  char    Sccs_id[] = "@(#)%Portal Version: sky_create_set_payinfo.c:ServerIDCVelocityInt:3:2006-Sep-06 16:40:39 %";
+static  char    Sccs_id[] = "@(#)%Portal Version: fm_sky_create_set_payinfo.c:ServerIDCVelocityInt:3:2006-Sep-06 16:40:39 %";
 #endif
 
 /*******************************************************************
@@ -30,7 +30,7 @@ static  char    Sccs_id[] = "@(#)%Portal Version: sky_create_set_payinfo.c:Serve
 #include "pinlog.h"
 #include "cust_flds_ops.h"
 
-#define FILE_SOURCE_ID  "sky_create_set_payinfo.c"
+#define FILE_SOURCE_ID  "fm_sky_create_set_payinfo.c"
 
 
 /*******************************************************************
