@@ -152,6 +152,7 @@ fm_sky_set_status_and_payinfo(
 	int32		status_flag = 4;
 	int32		db = 1;
 	int32           trans_id = 0;
+	int32           *pymt_offset = NULL;
 
 	if (PIN_ERR_IS_ERR(ebufp))
         {
@@ -163,7 +164,8 @@ fm_sky_set_status_and_payinfo(
                 "fm_sky_set_status_and_payinfo Input Flist", i_flistp);
 
 	acct_pdp = PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_POID, 1, ebufp);
-		
+
+	pymt_offset = PIN_FLIST_FLD_GET(i_flistp, PIN_FLD_PAYMENT_OFFSET, 1, ebufp);		
 	trans_id = fm_utils_trans_open( ctxp, PCM_TRANS_OPEN_READWRITE,
                 acct_pdp, ebufp );	
 
@@ -189,12 +191,12 @@ fm_sky_set_status_and_payinfo(
 
 	PIN_ERR_LOG_FLIST(PIN_ERR_LEVEL_DEBUG,
                         "fm_sky_set_status_and_payinfo opcode return flist", set_status_oflistp);
+	PIN_FLIST_FLD_PUT(add_payinfo_iflistp, PIN_FLD_POID, acct_pdp, ebufp);
+
+	PIN_FLIST_FLD_SET(add_payinfo_iflistp, PIN_FLD_PROGRAM_NAME, (void *)"Add Payinfo", ebufp);
 
 	PIN_FLIST_ELEM_COPY(i_flistp, PIN_FLD_PAYINFO, 1, add_payinfo_iflistp, PIN_FLD_PAYINFO, 1, ebufp);
 	
-	PIN_FLIST_FLD_PUT(add_payinfo_iflistp, PIN_FLD_POID, acct_pdp, ebufp);
-
-	PIN_FLIST_FLD_SET(add_payinfo_iflistp, PIN_FLD_PROGRAM_NAME, (void *)"Add Payinfo", ebufp)
 
 	 if (PIN_ERR_IS_ERR(ebufp)) {
                 PIN_ERR_LOG_EBUF(PIN_ERR_LEVEL_ERROR,
