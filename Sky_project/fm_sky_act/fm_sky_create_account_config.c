@@ -36,6 +36,7 @@ struct cm_fm_config fm_sky_create_account_config[] = {
 	{ ST_OP_CREATE_ACCOUNT,		"op_sky_create_account" },
 	{ ST_OP_SET_STATUS_PAYINFO,	"op_sky_set_status_and_payinfo" },
 	{ ST_SKY_PURCHASE_BUNDLE_CHANGE_BDOM,	"op_sky_subs_purchase_deal" },
+	{ ST_OP_PAYMENT_RESPONSE,	"op_sky_pymt_response" },
 	{ 0,	(char *)0 }
 };
 

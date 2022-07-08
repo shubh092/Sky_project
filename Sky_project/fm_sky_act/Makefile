@@ -63,12 +63,14 @@ INCFILES= $(INCDIR)/pin_cust.h $(INCDIR)/pcm.h \
 FILES= fm_sky_create_account.c \
 	fm_sky_act_set_status_and_payinfo.c \
 	fm_sky_create_account_config.c \
-	fm_sky_subs_purchase_deal.c
+	fm_sky_subs_purchase_deal.c\
+	fm_sky_act_payment_response.c
 	 
 OBJECTS= fm_sky_create_account.o \
 	fm_sky_act_set_status_and_payinfo.o \
  	fm_sky_create_account_config.o \
-	fm_sky_subs_purchase_deal.o
+	fm_sky_subs_purchase_deal.o\
+	fm_sky_act_payment_response.o
 	
 LIBCUST=fm_sky_act.$(SL_EXT)
 

@@ -1,0 +1,5 @@
+r << XXX 1
+0       PIN_FLD_POID POID [0] 0.0.0.1 /account 1 1
+0       PIN_FLD_TRANS_ID        STR [0] "T1,80,1"
+XXX
+xop ST_OP_PAYMENT_RESPONSE 0 1
